@@ -585,10 +585,22 @@ if __name__ == "__main__":
     )
     parser.add_argument("--port", type=int, default=8808, help="Server port")
     parser.add_argument(
+        "--host",
+        type=str,
+        default="0.0.0.0",
+        help="Bind address. Use 127.0.0.1 to restrict access to the local machine; "
+             "the default 0.0.0.0 exposes the unauthenticated UI/API to the network (default: 0.0.0.0)",
+    )
+    parser.add_argument(
         "--device",
         type=str,
         default="auto",
         help="Runtime device: auto, cpu, mps, cuda, or cuda:N (default: auto)",
     )
     args = parser.parse_args()
-    run_demo(model_id=args.model_id, server_port=args.port, device=args.device)
+    run_demo(
+        model_id=args.model_id,
+        server_name=args.host,
+        server_port=args.port,
+        device=args.device,
+    )
